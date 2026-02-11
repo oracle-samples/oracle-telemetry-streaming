@@ -1,0 +1,11 @@
+# build output                                                                  
+dist                                                                            
+node_modules                                                                    
+                                                                                
+# lockfiles not used                                                            
+package-lock.json                                                               
+                                                                                
+# generated files                                                               
+coverage                                                                        
+jest.config.js
+README.md

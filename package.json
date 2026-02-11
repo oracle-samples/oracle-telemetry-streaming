@@ -1,0 +1,42 @@
+{
+  "name": "oracle-oracle-telemetry",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "grafana-toolkit plugin:build",
+    "test": "grafana-toolkit plugin:test",
+    "dev": "grafana-toolkit plugin:dev",
+    "watch": "grafana-toolkit plugin:dev --watch",
+    "sign": "grafana-toolkit plugin:sign",
+    "start": "yarn watch"
+  },
+  "author": "Shanu.Gandhi@oracle.com",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@grafana/data": "^8.1.2",
+    "@grafana/runtime": "^8.1.2",
+    "@grafana/toolkit": "^8.1.2",
+    "@grafana/ui": "^8.1.2",
+    "@testing-library/jest-dom": "5.16.5",
+    "@testing-library/react": "12.1.5",
+    "@types/identity-obj-proxy": "^3",
+    "@types/lodash": "^4.14.172",
+    "@types/styled-components": "^5.1.14",
+    "identity-obj-proxy": "^3.0.0"
+  },
+  "resolutions": {
+    "rxjs": "7.3.0"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "@types/react": "^17.0.20",
+    "list-react-files": "^0.2.0",
+    "lodash": "^4.17.21",
+    "monaco-editor": "^0.21.2",
+    "react": "17",
+    "react-dom": "17",
+    "styled-components": "^5.3.1"
+  }
+}
