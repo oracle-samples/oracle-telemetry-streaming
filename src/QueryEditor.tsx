@@ -24,29 +24,22 @@
 //
 //-----------------------------------------------------------------------------
 
-
-
 // This is the component that we see for writing promql/sql queries
 // after selecting our plugin.
 
-import React, { ChangeEvent, PureComponent } from "react";
-import { InlineFormLabel, TextArea, Select, LegacyForms } from "@grafana/ui";
-import { QueryEditorProps, SelectableValue } from "@grafana/data";
-import { DataSource } from "./datasource";
-import { DataSourceOptionsObj, QueryObj, InData } from "./types";
+import React, { ChangeEvent, PureComponent } from 'react';
+import { InlineFormLabel, TextArea, Select, LegacyForms } from '@grafana/ui';
+import { QueryEditorProps, SelectableValue } from '@grafana/data';
+import { DataSource } from './datasource';
+import { DataSourceOptionsObj, QueryObj, InData } from './types';
 
-import {
-  AutoCompleteContainer,
-  Input,
-  AutoCompleteItem,
-  AutoCompleteItemButton,
-} from "./styles";
+import { AutoCompleteContainer, Input, AutoCompleteItem, AutoCompleteItemButton } from './styles';
 
 const { Switch } = LegacyForms;
 
 const QUERYLANG_OPTIONS: Array<SelectableValue<string>> = [
-  { label: "PROMQL", value: "promql" },
-  { label: "SQL", value: "sql" },
+  { label: 'PROMQL', value: 'promql' },
+  { label: 'SQL', value: 'sql' },
 ];
 
 type Props = QueryEditorProps<DataSource, QueryObj, DataSourceOptionsObj>;
@@ -65,7 +58,7 @@ export class QueryEditor extends PureComponent<Props, QueryEditorState> {
     super(props);
     this.state = {
       search: {
-        text: "",
+        text: '',
         suggestions: [] as InData[],
       },
       isComponentVisible: true,
@@ -168,11 +161,9 @@ export class QueryEditor extends PureComponent<Props, QueryEditorState> {
     const value = e.target.value;
     let suggestionsNew: InData[] = []; //creates an empty array for suggestions
 
-    if (value.length > 0 && !value.includes("(") && !value.includes(")")) {
-      const regex = new RegExp(`^${value}`, "i");
-      suggestionsNew = this.labelList
-        .sort()
-        .filter((v: InData) => regex.test(v.name));
+    if (value.length > 0 && !value.includes('(') && !value.includes(')')) {
+      const regex = new RegExp(`^${value}`, 'i');
+      suggestionsNew = this.labelList.sort().filter((v: InData) => regex.test(v.name));
     }
     //the above if condition check if entered text is not empty and then
     //populate new suggestions list with the json data using regular expression
@@ -220,12 +211,12 @@ export class QueryEditor extends PureComponent<Props, QueryEditorState> {
 
     let vsql = Number(this.props.query.stepTextSql);
     if (isNaN(vsql) || vsql < 10) {
-      onChange({ ...query, stepTextSql: "10" });
+      onChange({ ...query, stepTextSql: '10' });
     }
 
     let vprom = Number(this.props.query.stepTextProm);
     if (isNaN(vprom) || vprom < 10) {
-      onChange({ ...query, stepTextProm: "10" });
+      onChange({ ...query, stepTextProm: '10' });
     }
 
     const { onRunQuery } = this.props;
@@ -276,48 +267,48 @@ export class QueryEditor extends PureComponent<Props, QueryEditorState> {
     var prefetchCountText = this.props.query.prefetchCountText;
     var checkedVal = this.props.query.convertSqlResults;
 
-    var curLang = this.props.query.queryLang ?? "promql";
+    var curLang = this.props.query.queryLang ?? 'promql';
 
     const { suggestions } = this.state.search;
 
     return (
       <div>
         <div className="gf-form">
-          <div style={{ width: "115px" }}>
-            {curLang === "promql" ? (
+          <div style={{ width: '115px' }}>
+            {curLang === 'promql' ? (
               <Select
-                className={"select-container"}
+                className={'select-container'}
                 isSearchable={false}
                 options={QUERYLANG_OPTIONS}
-                defaultValue={{ label: "PROMQL", value: "promql" }}
+                defaultValue={{ label: 'PROMQL', value: 'promql' }}
                 onChange={this.onQueryLangChange}
               />
             ) : (
               <Select
-                className={"select-container"}
+                className={'select-container'}
                 isSearchable={false}
                 options={QUERYLANG_OPTIONS}
-                defaultValue={{ label: "SQL", value: "sql" }}
+                defaultValue={{ label: 'SQL', value: 'sql' }}
                 onChange={this.onQueryLangChange}
               />
             )}
           </div>
 
-          <div style={{ marginLeft: "25px", width: "calc(100% - 200px)" }}>
-            {curLang === "promql" ? (
+          <div style={{ marginLeft: '25px', width: 'calc(100% - 200px)' }}>
+            {curLang === 'promql' ? (
               //If selected language is Promql display this input box
               <div>
-                <div style={{ width: "115px", paddingBottom: "5px" }}>{}</div>
+                <div style={{ width: '115px', paddingBottom: '5px' }}>{}</div>
                 <Input
                   id="input"
                   autoComplete="off"
-                  value={exprProm || ""}
+                  value={exprProm || ''}
                   onChange={this.onPromTextChanged}
                   onBlur={this.onPromTextBlur}
                   className="gf-form-input"
                   placeholder="Enter Promql Query"
                   type="text"
-                  style={{ paddingBottom: "5px" }}
+                  style={{ paddingBottom: '5px' }}
                 />
               </div>
             ) : (
@@ -325,7 +316,7 @@ export class QueryEditor extends PureComponent<Props, QueryEditorState> {
                 <TextArea
                   //if selected language is SQL display this Textarea as sql
                   //queries are generally bigger
-                  value={exprSql || ""}
+                  value={exprSql || ''}
                   placeholder="Enter Sql Query"
                   onChange={this.onSqlTextChanged}
                   onBlur={this.onSqlBlur}
@@ -345,11 +336,11 @@ export class QueryEditor extends PureComponent<Props, QueryEditorState> {
             <div
               onClick={() => this.setIsComponentVisible(false)}
               style={{
-                display: this.state.isComponentVisible ? "block" : "none",
-                width: "200vw",
-                height: "200vh",
-                backgroundColor: "transparent",
-                position: "fixed",
+                display: this.state.isComponentVisible ? 'block' : 'none',
+                width: '200vw',
+                height: '200vh',
+                backgroundColor: 'transparent',
+                position: 'fixed',
                 zIndex: 0,
                 top: 0,
                 left: 0,
@@ -359,10 +350,7 @@ export class QueryEditor extends PureComponent<Props, QueryEditorState> {
               <AutoCompleteContainer>
                 {suggestions.map((item: InData) => (
                   <AutoCompleteItem key={item.name}>
-                    <AutoCompleteItemButton
-                      key={item.name}
-                      onClick={() => this.suggestionSelected(item)}
-                    >
+                    <AutoCompleteItemButton key={item.name} onClick={() => this.suggestionSelected(item)}>
                       {item.name}
                     </AutoCompleteItemButton>
                   </AutoCompleteItem>
@@ -372,14 +360,14 @@ export class QueryEditor extends PureComponent<Props, QueryEditorState> {
           </div>
         </div>
 
-        {curLang === "promql" ? (
+        {curLang === 'promql' ? (
           <div>
             <div className="gf-form">
               <InlineFormLabel width={7}>Legend</InlineFormLabel>
-              <div style={{ marginLeft: "25px", width: "400px" }}>
+              <div style={{ marginLeft: '25px', width: '400px' }}>
                 <Input
                   id="inputLegend"
-                  value={legendFormatProm || ""}
+                  value={legendFormatProm || ''}
                   onChange={this.onLegendTextChangedProm}
                   onBlur={this.onLegendBlur}
                   className="gf-form-input width-32"
@@ -390,10 +378,10 @@ export class QueryEditor extends PureComponent<Props, QueryEditorState> {
             </div>
             <div className="gf-form">
               <InlineFormLabel width={7}>Step Size</InlineFormLabel>
-              <div style={{ marginLeft: "25px", width: "400px" }}>
+              <div style={{ marginLeft: '25px', width: '400px' }}>
                 <Input
                   id="stepSize"
-                  value={stepTextProm || ""}
+                  value={stepTextProm || ''}
                   onChange={this.onStepTextChangedProm}
                   onBlur={this.onStepBlur}
                   className="gf-form-input width-32"
@@ -408,14 +396,14 @@ export class QueryEditor extends PureComponent<Props, QueryEditorState> {
           </div>
         ) : null}
 
-        {curLang === "sql" ? (
+        {curLang === 'sql' ? (
           <div>
             <div className="gf-form">
               <InlineFormLabel width={7}>Legend</InlineFormLabel>
-              <div style={{ marginLeft: "25px", width: "400px" }}>
+              <div style={{ marginLeft: '25px', width: '400px' }}>
                 <Input
                   id="inputLegend"
-                  value={legendFormatSql || ""}
+                  value={legendFormatSql || ''}
                   onChange={this.onLegendTextChangedSql}
                   onBlur={this.onLegendBlur}
                   className="gf-form-input width-32"
@@ -426,10 +414,10 @@ export class QueryEditor extends PureComponent<Props, QueryEditorState> {
             </div>
             <div className="gf-form">
               <InlineFormLabel width={7}>Step Size</InlineFormLabel>
-              <div style={{ marginLeft: "25px", width: "400px" }}>
+              <div style={{ marginLeft: '25px', width: '400px' }}>
                 <Input
                   id="stepSize"
-                  value={stepTextSql || ""}
+                  value={stepTextSql || ''}
                   onChange={this.onStepTextChangedSql}
                   onBlur={this.onStepBlur}
                   className="gf-form-input width-32"
@@ -443,10 +431,10 @@ export class QueryEditor extends PureComponent<Props, QueryEditorState> {
             </div>
             <div className="gf-form">
               <InlineFormLabel width={7}>Prefetch Count</InlineFormLabel>
-              <div style={{ marginLeft: "25px", width: "400px" }}>
+              <div style={{ marginLeft: '25px', width: '400px' }}>
                 <Input
                   id="prefetchCount"
-                  value={prefetchCountText || ""}
+                  value={prefetchCountText || ''}
                   onChange={this.onPrefetchCountTextChanged}
                   onBlur={this.onPrefetchCountBlur}
                   className="gf-form-input width-32"

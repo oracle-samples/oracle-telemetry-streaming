@@ -24,14 +24,12 @@
 //
 //-----------------------------------------------------------------------------
 
+import React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { ConfigEditor } from '../ConfigEditor';
 
-
-import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
-import { ConfigEditor } from "../ConfigEditor";
-
-jest.mock("@grafana/ui", () => {
-  const actual = jest.requireActual("@grafana/ui");
+jest.mock('@grafana/ui', () => {
+  const actual = jest.requireActual('@grafana/ui');
 
   return {
     ...actual,
@@ -39,9 +37,7 @@ jest.mock("@grafana/ui", () => {
       <select
         data-testid="mock-select"
         value={value?.value}
-        onChange={(e) =>
-          onChange(options.find((o: any) => o.value === e.target.value))
-        }
+        onChange={(e) => onChange(options.find((o: any) => o.value === e.target.value))}
       >
         {options.map((o: any) => (
           <option key={o.value} value={o.value}>
@@ -58,15 +54,15 @@ function setup(overrides?: any) {
 
   const options = {
     id: 1,
-    uid: "oracle-telemetry-test",
+    uid: 'oracle-telemetry-test',
     orgId: 1,
-    name: "Oracle Telemetry",
-    type: "oracle-oracle-telemetry",
-    access: "proxy",
-    url: "",
+    name: 'Oracle Telemetry',
+    type: 'oracle-oracle-telemetry',
+    access: 'proxy',
+    url: '',
     jsonData: {
-      queryAuth: "TNS",
-      deploymentType: "ON-PREM",
+      queryAuth: 'TNS',
+      deploymentType: 'ON-PREM',
       ...(overrides?.jsonData ?? {}),
     },
     secureJsonFields: {},
@@ -74,58 +70,54 @@ function setup(overrides?: any) {
     ...overrides,
   };
 
-  render(
-    <ConfigEditor options={options as any} onOptionsChange={onOptionsChange} />
-  );
+  render(<ConfigEditor options={options as any} onOptionsChange={onOptionsChange} />);
 
   return { onOptionsChange };
 }
 
-describe("ConfigEditor", () => {
-  it("renders base fields", () => {
+describe('ConfigEditor', () => {
+  it('renders base fields', () => {
     setup();
 
-    expect(screen.getByText("Connection Type")).toBeInTheDocument();
-    expect(screen.getByText("Deployment Type")).toBeInTheDocument();
-    expect(
-      screen.getByPlaceholderText("Database Username")
-    ).toBeInTheDocument();
+    expect(screen.getByText('Connection Type')).toBeInTheDocument();
+    expect(screen.getByText('Deployment Type')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Database Username')).toBeInTheDocument();
   });
 
-  it("updates dbUser", () => {
+  it('updates dbUser', () => {
     const { onOptionsChange } = setup();
 
-    fireEvent.change(screen.getByPlaceholderText("Database Username"), {
-      target: { value: "scott" },
+    fireEvent.change(screen.getByPlaceholderText('Database Username'), {
+      target: { value: 'scott' },
     });
 
     expect(onOptionsChange).toHaveBeenCalledWith(
       expect.objectContaining({
-        jsonData: expect.objectContaining({ dbUser: "scott" }),
+        jsonData: expect.objectContaining({ dbUser: 'scott' }),
       })
     );
   });
 
-  it("updates password in secureJsonData", () => {
+  it('updates password in secureJsonData', () => {
     const { onOptionsChange } = setup();
 
-    fireEvent.change(screen.getByPlaceholderText("Database Password"), {
-      target: { value: "tiger" },
+    fireEvent.change(screen.getByPlaceholderText('Database Password'), {
+      target: { value: 'tiger' },
     });
 
     expect(onOptionsChange).toHaveBeenCalledWith(
       expect.objectContaining({
-        secureJsonData: { dbPassword: "tiger" },
+        secureJsonData: { dbPassword: 'tiger' },
       })
     );
   });
 
-  it("resets password and clears fields", () => {
+  it('resets password and clears fields', () => {
     const { onOptionsChange } = setup({
       secureJsonFields: { dbPassword: true },
     });
 
-    fireEvent.click(screen.getByText("Reset"));
+    fireEvent.click(screen.getByText('Reset'));
 
     expect(onOptionsChange).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -133,112 +125,108 @@ describe("ConfigEditor", () => {
           dbPassword: false,
         }),
         secureJsonData: expect.objectContaining({
-          dbPassword: "",
-          dbUser: "",
-          dbConnectString: "",
+          dbPassword: '',
+          dbUser: '',
+          dbConnectString: '',
         }),
       })
     );
   });
 
-  it("renders BASIC auth fields", () => {
-    setup({ jsonData: { queryAuth: "BASIC" } });
+  it('renders BASIC auth fields', () => {
+    setup({ jsonData: { queryAuth: 'BASIC' } });
 
-    expect(
-      screen.getByPlaceholderText("Database Hostname")
-    ).toBeInTheDocument();
-    expect(screen.getByPlaceholderText("Database Port")).toBeInTheDocument();
-    expect(
-      screen.getByPlaceholderText("Database Service Name")
-    ).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Database Hostname')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Database Port')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Database Service Name')).toBeInTheDocument();
   });
 
-  it("updates BASIC auth fields", () => {
-    const { onOptionsChange } = setup({ jsonData: { queryAuth: "BASIC" } });
+  it('updates BASIC auth fields', () => {
+    const { onOptionsChange } = setup({ jsonData: { queryAuth: 'BASIC' } });
 
-    fireEvent.change(screen.getByPlaceholderText("Database Hostname"), {
-      target: { value: "localhost" },
+    fireEvent.change(screen.getByPlaceholderText('Database Hostname'), {
+      target: { value: 'localhost' },
     });
 
-    fireEvent.change(screen.getByPlaceholderText("Database Port"), {
-      target: { value: "1521" },
+    fireEvent.change(screen.getByPlaceholderText('Database Port'), {
+      target: { value: '1521' },
     });
 
-    fireEvent.change(screen.getByPlaceholderText("Database Service Name"), {
-      target: { value: "ORCL" },
+    fireEvent.change(screen.getByPlaceholderText('Database Service Name'), {
+      target: { value: 'ORCL' },
     });
 
     expect(onOptionsChange).toHaveBeenCalledWith(
       expect.objectContaining({
         jsonData: expect.objectContaining({
-          dbHostName: "localhost",
+          dbHostName: 'localhost',
         }),
       })
     );
   });
 
-  it("updates deployment type", () => {
+  it('updates deployment type', () => {
     const { onOptionsChange } = setup();
 
-    const selects = screen.getAllByTestId("mock-select");
+    const selects = screen.getAllByTestId('mock-select');
 
     // second select = Deployment Type
     fireEvent.change(selects[1], {
-      target: { value: "ADB" },
+      target: { value: 'ADB' },
     });
 
     expect(onOptionsChange).toHaveBeenCalledWith(
       expect.objectContaining({
         jsonData: expect.objectContaining({
-          deploymentType: "ADB",
+          deploymentType: 'ADB',
         }),
       })
     );
   });
 
-  it("updates queryAuth when auth select changes", () => {
+  it('updates queryAuth when auth select changes', () => {
     const { onOptionsChange } = setup();
 
-    const selects = screen.getAllByTestId("mock-select");
+    const selects = screen.getAllByTestId('mock-select');
 
     fireEvent.change(selects[0], {
-      target: { value: "BASIC" },
+      target: { value: 'BASIC' },
     });
 
     expect(onOptionsChange).toHaveBeenCalledWith(
       expect.objectContaining({
         jsonData: expect.objectContaining({
-          queryAuth: "BASIC",
+          queryAuth: 'BASIC',
         }),
       })
     );
   });
 
-  it("updates deploymentType when deployment select changes", () => {
+  it('updates deploymentType when deployment select changes', () => {
     const { onOptionsChange } = setup();
 
-    const selects = screen.getAllByTestId("mock-select");
+    const selects = screen.getAllByTestId('mock-select');
 
     fireEvent.change(selects[1], {
-      target: { value: "ADB" },
+      target: { value: 'ADB' },
     });
 
     expect(onOptionsChange).toHaveBeenCalledWith(
       expect.objectContaining({
         jsonData: expect.objectContaining({
-          deploymentType: "ADB",
+          deploymentType: 'ADB',
         }),
       })
     );
   });
 
-  it("resets secure fields when password is reset", () => {
+  it('resets secure fields when password is reset', () => {
     const { onOptionsChange } = setup({
       secureJsonFields: { dbPassword: true },
-      secureJsonData: { dbPassword: "secret" },
+      secureJsonData: { dbPassword: 'secret' },
     });
 
-    fireEvent.click(screen.getByRole("button"));
+    fireEvent.click(screen.getByRole('button'));
 
     expect(onOptionsChange).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -246,7 +234,7 @@ describe("ConfigEditor", () => {
           dbPassword: false,
         }),
         secureJsonData: expect.objectContaining({
-          dbPassword: "",
+          dbPassword: '',
         }),
       })
     );

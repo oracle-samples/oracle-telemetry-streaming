@@ -24,71 +24,61 @@
 //
 //-----------------------------------------------------------------------------
 
+import { addLabelToQuery, addLabelToSelector } from '../AddLabelToQuery';
 
-
-import { addLabelToQuery, addLabelToSelector } from "../AddLabelToQuery";
-
-describe("addLabelToSelector", () => {
-  it("adds label to empty selector", () => {
-    const result = addLabelToSelector("", "job", "api");
+describe('addLabelToSelector', () => {
+  it('adds label to empty selector', () => {
+    const result = addLabelToSelector('', 'job', 'api');
     expect(result).toBe('{job="api"}');
   });
 
-  it("adds label to existing selector", () => {
-    const result = addLabelToSelector('env="prod"', "job", "api");
+  it('adds label to existing selector', () => {
+    const result = addLabelToSelector('env="prod"', 'job', 'api');
     expect(result).toBe('{env="prod",job="api"}');
   });
 
-  it("uses provided operator", () => {
-    const result = addLabelToSelector("", "status", "5..", "=~");
+  it('uses provided operator', () => {
+    const result = addLabelToSelector('', 'status', '5..', '=~');
     expect(result).toBe('{status=~"5.."}');
   });
 
-  it("does not duplicate identical labels", () => {
-    const result = addLabelToSelector('job="api"', "job", "api");
+  it('does not duplicate identical labels', () => {
+    const result = addLabelToSelector('job="api"', 'job', 'api');
     expect(result).toBe('{job="api"}');
   });
 });
 
-describe("addLabelToQuery", () => {
-  it("throws if label key is missing", () => {
-    expect(() => addLabelToQuery("metric", "", "v")).toThrow();
+describe('addLabelToQuery', () => {
+  it('throws if label key is missing', () => {
+    expect(() => addLabelToQuery('metric', '', 'v')).toThrow();
   });
 
-  it("adds selector to bare metric", () => {
-    const result = addLabelToQuery("http_requests_total", "job", "api");
+  it('adds selector to bare metric', () => {
+    const result = addLabelToQuery('http_requests_total', 'job', 'api');
 
     expect(result).toBe('http_requests_total{job="api"}');
   });
 
-  it("adds label to existing selector", () => {
-    const result = addLabelToQuery(
-      'http_requests_total{method="GET"}',
-      "job",
-      "api"
-    );
+  it('adds label to existing selector', () => {
+    const result = addLabelToQuery('http_requests_total{method="GET"}', 'job', 'api');
 
     expect(result).toBe('http_requests_total{job="api",method="GET"}');
   });
 
-  it("does not modify Grafana variables", () => {
-    const result = addLabelToQuery("${__rate_interval}", "job", "api");
+  it('does not modify Grafana variables', () => {
+    const result = addLabelToQuery('${__rate_interval}', 'job', 'api');
 
-    expect(result).toBe("${__rate_interval}");
+    expect(result).toBe('${__rate_interval}');
   });
 
-  it("converts Infinity to +Inf", () => {
-    const result = addLabelToQuery("metric", "le", Infinity);
+  it('converts Infinity to +Inf', () => {
+    const result = addLabelToQuery('metric', 'le', Infinity);
 
     expect(result).toBe('metric{le="+Inf"}');
   });
 
-  it("adds label to multiple metrics", () => {
-    const result = addLabelToQuery(
-      "sum(rate(http_requests_total[5m]))",
-      "job",
-      "api"
-    );
+  it('adds label to multiple metrics', () => {
+    const result = addLabelToQuery('sum(rate(http_requests_total[5m]))', 'job', 'api');
 
     expect(result).toContain('{job="api"}');
   });
