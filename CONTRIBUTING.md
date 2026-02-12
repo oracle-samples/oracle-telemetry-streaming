@@ -1,4 +1,4 @@
-*Detailed instructions on how to contribute to the project, if applicable. Must include section about Oracle Contributor Agreement with link and instructions*
+_Detailed instructions on how to contribute to the project, if applicable. Must include section about Oracle Contributor Agreement with link and instructions_
 
 # Contributing to this repository
 
@@ -15,7 +15,7 @@ vulnerability, do not raise a GitHub issue and follow the instructions in our
 ## Contributing code
 
 We welcome your code contributions. Before submitting code via a pull request,
-you will need to have signed the [Oracle Contributor Agreement][OCA] (OCA) and
+you will need to have signed the [Oracle Contributor Agreement][oca] (OCA) and
 your commits need to include the following line using the name and e-mail
 address you used to sign the OCA:
 
@@ -43,7 +43,7 @@ can be accepted.
 1. Ensure that any documentation is updated with the changes that are required
    by your change.
 1. Ensure that any samples are updated if the base image has been changed.
-1. Submit the pull request. *Do not leave the pull request blank*. Explain exactly
+1. Submit the pull request. _Do not leave the pull request blank_. Explain exactly
    what your changes are meant to do and provide simple steps on how to validate.
    your changes. Ensure that you reference the issue you created as well.
 1. We will assign the pull request to 2-3 people for review before it is merged.
@@ -51,7 +51,7 @@ can be accepted.
 ## Code of conduct
 
 Follow the [Golden Rule](https://en.wikipedia.org/wiki/Golden_Rule). If you'd
-like more specific guidelines, see the [Contributor Covenant Code of Conduct][COC].
+like more specific guidelines, see the [Contributor Covenant Code of Conduct][coc].
 
-[OCA]: https://oca.opensource.oracle.com
-[COC]: https://www.contributor-covenant.org/version/1/4/code-of-conduct/
+[oca]: https://oca.opensource.oracle.com
+[coc]: https://www.contributor-covenant.org/version/1/4/code-of-conduct/

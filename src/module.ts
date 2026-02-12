@@ -24,25 +24,19 @@
 //
 //-----------------------------------------------------------------------------
 
-
-
-import { DataSourcePlugin } from "@grafana/data";
-import { DataSource } from "./datasource";
-import { ConfigEditor } from "./ConfigEditor";
-import { QueryEditor } from "./QueryEditor";
-import { QueryObj, DataSourceOptionsObj } from "./types";
-import { VariableQueryEditor } from "./VariableQueryEditor";
+import { DataSourcePlugin } from '@grafana/data';
+import { DataSource } from './datasource';
+import { ConfigEditor } from './ConfigEditor';
+import { QueryEditor } from './QueryEditor';
+import { QueryObj, DataSourceOptionsObj } from './types';
+import { VariableQueryEditor } from './VariableQueryEditor';
 
 //This is the main DataSourcePlugin object that is used in our plugin. Here we
 //need to define various components to be used in our plugin by importing them
 //and setting config options (like setConfigEditor to set the ConfigEditor
 //component, setQueryEditor to set the QueryEditor component) for
 //DataSourcePlugin object.
-export const plugin = new DataSourcePlugin<
-  DataSource,
-  QueryObj,
-  DataSourceOptionsObj
->(DataSource)
+export const plugin = new DataSourcePlugin<DataSource, QueryObj, DataSourceOptionsObj>(DataSource)
   .setConfigEditor(ConfigEditor)
   .setQueryEditor(QueryEditor)
   .setVariableQueryEditor(VariableQueryEditor);

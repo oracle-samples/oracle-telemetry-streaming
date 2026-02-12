@@ -24,56 +24,51 @@
 //
 //-----------------------------------------------------------------------------
 
+import React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { VariableQueryEditor } from '../VariableQueryEditor';
+import { VariableQueryObject } from '../types';
 
-
-import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
-import { VariableQueryEditor } from "../VariableQueryEditor";
-import { VariableQueryObject } from "../types";
-
-describe("VariableQueryEditor", () => {
+describe('VariableQueryEditor', () => {
   const defaultQuery: VariableQueryObject = {
-    query: "up",
+    query: 'up',
   };
 
-  test("renders query language selector and query input", () => {
+  test('renders query language selector and query input', () => {
     render(<VariableQueryEditor query={defaultQuery} onChange={jest.fn()} />);
 
-    expect(screen.getByText("Query Language")).toBeInTheDocument();
-    expect(screen.getByText("Query")).toBeInTheDocument();
+    expect(screen.getByText('Query Language')).toBeInTheDocument();
+    expect(screen.getByText('Query')).toBeInTheDocument();
 
-    const input = screen.getByRole("textbox");
-    expect(input).toHaveValue("up");
+    const input = screen.getByRole('textbox');
+    expect(input).toHaveValue('up');
   });
-  test("updates query value when user types", () => {
-    render(<VariableQueryEditor query={{ query: "" }} onChange={jest.fn()} />);
+  test('updates query value when user types', () => {
+    render(<VariableQueryEditor query={{ query: '' }} onChange={jest.fn()} />);
 
-    const input = screen.getByRole("textbox");
+    const input = screen.getByRole('textbox');
 
     fireEvent.change(input, {
-      target: { name: "query", value: "cpu_usage" },
+      target: { name: 'query', value: 'cpu_usage' },
     });
 
-    expect(input).toHaveValue("cpu_usage");
+    expect(input).toHaveValue('cpu_usage');
   });
 
-  test("calls onChange with updated query when input loses focus", () => {
+  test('calls onChange with updated query when input loses focus', () => {
     const onChange = jest.fn();
 
-    render(<VariableQueryEditor query={{ query: "up" }} onChange={onChange} />);
+    render(<VariableQueryEditor query={{ query: 'up' }} onChange={onChange} />);
 
-    const input = screen.getByRole("textbox");
+    const input = screen.getByRole('textbox');
 
     fireEvent.change(input, {
-      target: { name: "query", value: "node_cpu_seconds_total" },
+      target: { name: 'query', value: 'node_cpu_seconds_total' },
     });
 
     fireEvent.blur(input);
 
     expect(onChange).toHaveBeenCalledTimes(1);
-    expect(onChange).toHaveBeenCalledWith(
-      { query: "node_cpu_seconds_total" },
-      "node_cpu_seconds_total"
-    );
+    expect(onChange).toHaveBeenCalledWith({ query: 'node_cpu_seconds_total' }, 'node_cpu_seconds_total');
   });
 });

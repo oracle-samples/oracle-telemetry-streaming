@@ -24,37 +24,29 @@
 //
 //-----------------------------------------------------------------------------
 
-
-
-import React, { ChangeEvent, PureComponent } from "react";
-import { LegacyForms, InlineField, InlineFormLabel, Select } from "@grafana/ui";
-import {
-  DataSourcePluginOptionsEditorProps,
-  SelectableValue,
-} from "@grafana/data";
-import { DataSourceOptionsObj, SecureJsonData } from "./types";
+import React, { ChangeEvent, PureComponent } from 'react';
+import { LegacyForms, InlineField, InlineFormLabel, Select } from '@grafana/ui';
+import { DataSourcePluginOptionsEditorProps, SelectableValue } from '@grafana/data';
+import { DataSourceOptionsObj, SecureJsonData } from './types';
 
 const { SecretFormField, FormField } = LegacyForms;
 
-interface Props
-  extends DataSourcePluginOptionsEditorProps<DataSourceOptionsObj> {}
+interface Props extends DataSourcePluginOptionsEditorProps<DataSourceOptionsObj> {}
 
 interface State {}
 
 const AUTH_OPTIONS: Array<SelectableValue<string>> = [
-  { label: "TNS", value: "TNS" },
-  { label: "BASIC", value: "BASIC" },
+  { label: 'TNS', value: 'TNS' },
+  { label: 'BASIC', value: 'BASIC' },
 ];
 
 const DEPLOYMENT_OPTIONS: Array<SelectableValue<string>> = [
-  { label: "ON-PREM", value: "ON-PREM" },
-  { label: "ADB", value: "ADB" },
+  { label: 'ON-PREM', value: 'ON-PREM' },
+  { label: 'ADB', value: 'ADB' },
 ];
 
-const getSelectValue = (
-  options: Array<SelectableValue<string>>,
-  value: string
-) => options.find((option) => option.value === value) || options[0];
+const getSelectValue = (options: Array<SelectableValue<string>>, value: string) =>
+  options.find((option) => option.value === value) || options[0];
 
 export class ConfigEditor extends PureComponent<Props, State> {
   onDBUserChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -136,9 +128,9 @@ export class ConfigEditor extends PureComponent<Props, State> {
       },
       secureJsonData: {
         ...options.secureJsonData,
-        dbPassword: "",
-        dbUser: "",
-        dbConnectString: "",
+        dbPassword: '',
+        dbUser: '',
+        dbConnectString: '',
       },
     });
   };
@@ -148,13 +140,10 @@ export class ConfigEditor extends PureComponent<Props, State> {
     const { jsonData, secureJsonFields } = options;
     const secureJsonData = (options.secureJsonData || {}) as SecureJsonData;
     const curAuth = options.jsonData.queryAuth;
-    const currentAuthValue = curAuth || "TNS";
-    const deployment = options.jsonData.deploymentType || "ON-PREM";
+    const currentAuthValue = curAuth || 'TNS';
+    const deployment = options.jsonData.deploymentType || 'ON-PREM';
     const authSelectValue = getSelectValue(AUTH_OPTIONS, currentAuthValue);
-    const deploymentSelectValue = getSelectValue(
-      DEPLOYMENT_OPTIONS,
-      deployment
-    );
+    const deploymentSelectValue = getSelectValue(DEPLOYMENT_OPTIONS, deployment);
 
     return (
       <div className="gf-form-group">
@@ -164,7 +153,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
           </InlineFormLabel>
           <InlineField>
             <Select
-              className={"select-container"}
+              className={'select-container'}
               isSearchable={false}
               options={AUTH_OPTIONS}
               value={authSelectValue}
@@ -174,15 +163,12 @@ export class ConfigEditor extends PureComponent<Props, State> {
           </InlineField>
         </div>
         <div className="gf-form">
-          <InlineFormLabel
-            width={10}
-            tooltip="Choose where your database is hosted"
-          >
+          <InlineFormLabel width={10} tooltip="Choose where your database is hosted">
             Deployment Type
           </InlineFormLabel>
           <InlineField>
             <Select
-              className={"select-container"}
+              className={'select-container'}
               isSearchable={false}
               options={DEPLOYMENT_OPTIONS}
               value={deploymentSelectValue}
@@ -199,7 +185,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
               labelWidth={10}
               inputWidth={20}
               onChange={this.onDBUserChange}
-              value={jsonData.dbUser || ""}
+              value={jsonData.dbUser || ''}
               placeholder="Database Username"
             />
           </div>
@@ -207,10 +193,8 @@ export class ConfigEditor extends PureComponent<Props, State> {
           <div className="gf-form-inline">
             <div className="gf-form">
               <SecretFormField
-                isConfigured={
-                  (secureJsonFields && secureJsonFields.dbPassword) as boolean
-                }
-                value={secureJsonData.dbPassword || ""}
+                isConfigured={(secureJsonFields && secureJsonFields.dbPassword) as boolean}
+                value={secureJsonData.dbPassword || ''}
                 label="Password"
                 placeholder="Database Password"
                 labelWidth={10}
@@ -221,14 +205,14 @@ export class ConfigEditor extends PureComponent<Props, State> {
             </div>
           </div>
 
-          {currentAuthValue === "TNS" ? (
+          {currentAuthValue === 'TNS' ? (
             <div className="gf-form">
               <FormField
                 label="Connection Identifier"
                 labelWidth={10}
                 inputWidth={20}
                 onChange={this.onDBConnectionIdentifierChange}
-                value={jsonData.dbConnectString || ""}
+                value={jsonData.dbConnectString || ''}
                 placeholder="Database Connection Identifier"
               />
             </div>
@@ -240,7 +224,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
                   labelWidth={10}
                   inputWidth={20}
                   onChange={this.onDBHostNameChange}
-                  value={jsonData.dbHostName || ""}
+                  value={jsonData.dbHostName || ''}
                   placeholder="Database Hostname"
                 />
               </div>
@@ -250,7 +234,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
                   labelWidth={10}
                   inputWidth={12}
                   onChange={this.onDBPortNameChange}
-                  value={jsonData.dbPortName || ""}
+                  value={jsonData.dbPortName || ''}
                   placeholder="Database Port"
                 />
               </div>
@@ -260,7 +244,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
                   labelWidth={10}
                   inputWidth={20}
                   onChange={this.onDBServiceNameChange}
-                  value={jsonData.dbServiceName || ""}
+                  value={jsonData.dbServiceName || ''}
                   placeholder="Database Service Name"
                 />
               </div>

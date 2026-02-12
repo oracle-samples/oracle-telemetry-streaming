@@ -24,28 +24,21 @@
 //
 //-----------------------------------------------------------------------------
 
-
-
 //This is the component that gets rendered when we create a query variable
 //It is the input box of query editor with its functionalities
-import { SelectableValue } from "@grafana/data";
+import { SelectableValue } from '@grafana/data';
 
-import React, { useState } from "react";
-import { VariableQueryObject } from "./types";
-import { Select, InlineFormLabel } from "@grafana/ui";
+import React, { useState } from 'react';
+import { VariableQueryObject } from './types';
+import { Select, InlineFormLabel } from '@grafana/ui';
 interface VariableQueryProps {
   query: VariableQueryObject;
   onChange: (query: VariableQueryObject, definition: string) => void;
 }
 
-export const VariableQueryEditor: React.FC<VariableQueryProps> = ({
-  onChange,
-  query,
-}) => {
+export const VariableQueryEditor: React.FC<VariableQueryProps> = ({ onChange, query }) => {
   const [state, setState] = useState(query);
-  const QUERY_OPTIONS: Array<SelectableValue<string>> = [
-    { label: "PROMQL", value: "promql" },
-  ];
+  const QUERY_OPTIONS: Array<SelectableValue<string>> = [{ label: 'PROMQL', value: 'promql' }];
 
   //this saves the query and  calls the backend fetch tags
   const saveQuery = () => {
@@ -53,7 +46,7 @@ export const VariableQueryEditor: React.FC<VariableQueryProps> = ({
   };
 
   const handleChangeLang = (option: SelectableValue<string>) => {
-    console.log("here");
+    console.log('here');
   };
 
   //this function handles the change in input of query text box and saves it in
@@ -75,7 +68,7 @@ export const VariableQueryEditor: React.FC<VariableQueryProps> = ({
         <Select
           className="select-container"
           isSearchable={false}
-          defaultValue={{ label: "PROMQL", value: "promql" }}
+          defaultValue={{ label: 'PROMQL', value: 'promql' }}
           onChange={handleChangeLang}
           options={QUERY_OPTIONS}
           width={35}
@@ -84,13 +77,7 @@ export const VariableQueryEditor: React.FC<VariableQueryProps> = ({
       {/* Row 2: Query */}
       <div className="gf-form">
         <InlineFormLabel width={10}>Query</InlineFormLabel>
-        <input
-          name="query"
-          className="gf-form-input"
-          onBlur={saveQuery}
-          onChange={handleChange}
-          value={state.query}
-        />
+        <input name="query" className="gf-form-input" onBlur={saveQuery} onChange={handleChange} value={state.query} />
       </div>
     </>
   );

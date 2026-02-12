@@ -24,9 +24,7 @@
 //
 //-----------------------------------------------------------------------------
 
-
-
-import { DataQuery, DataSourceJsonData } from "@grafana/data";
+import { DataQuery, DataSourceJsonData } from '@grafana/data';
 
 //This is the interface for query which contains all the fiels required with
 //query that are sent from frontend to backend

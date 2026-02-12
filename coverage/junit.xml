@@ -1,117 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="52" failures="0" errors="0" time="11.251">
-  <testsuite name="VariableQueryEditor" errors="0" failures="0" skipped="0" timestamp="2026-01-14T18:59:02" time="8.645" tests="3">
-    <testcase classname="VariableQueryEditor renders query language selector and query input" name="VariableQueryEditor renders query language selector and query input" time="3.953">
+<testsuites name="jest tests" tests="52" failures="0" errors="0" time="201.568">
+  <testsuite name="DataSource" errors="0" failures="0" skipped="0" timestamp="2026-02-12T18:39:09" time="65.735" tests="17">
+    <testcase classname="DataSource constructs without crashing" name="DataSource constructs without crashing" time="0.007">
     </testcase>
-    <testcase classname="VariableQueryEditor updates query value when user types" name="VariableQueryEditor updates query value when user types" time="0.12">
-    </testcase>
-    <testcase classname="VariableQueryEditor calls onChange with updated query when input loses focus" name="VariableQueryEditor calls onChange with updated query when input loses focus" time="0.064">
-    </testcase>
-  </testsuite>
-  <testsuite name="QueryEditor" errors="0" failures="0" skipped="0" timestamp="2026-01-14T18:59:02" time="8.962" tests="12">
-    <testcase classname="QueryEditor renders PROMQL editor by default" name="QueryEditor renders PROMQL editor by default" time="3.925">
-    </testcase>
-    <testcase classname="QueryEditor renders SQL editor when queryLang is sql" name="QueryEditor renders SQL editor when queryLang is sql" time="0.045">
-    </testcase>
-    <testcase classname="QueryEditor updates promql expression when typing" name="QueryEditor updates promql expression when typing" time="0.075">
-    </testcase>
-    <testcase classname="QueryEditor runs query when promql input loses focus" name="QueryEditor runs query when promql input loses focus" time="0.019">
-    </testcase>
-    <testcase classname="QueryEditor updates promql legend" name="QueryEditor updates promql legend" time="0.025">
-    </testcase>
-    <testcase classname="QueryEditor enforces minimum step size on blur (promql)" name="QueryEditor enforces minimum step size on blur (promql)" time="0.029">
-    </testcase>
-    <testcase classname="QueryEditor updates sql text when typing" name="QueryEditor updates sql text when typing" time="0.026">
-    </testcase>
-    <testcase classname="QueryEditor toggles Time Series Mode and runs query" name="QueryEditor toggles Time Series Mode and runs query" time="0.029">
-    </testcase>
-    <testcase classname="QueryEditor updates SQL prefetch count" name="QueryEditor updates SQL prefetch count" time="0.026">
-    </testcase>
-    <testcase classname="QueryEditor fetches label suggestions when typing promql" name="QueryEditor fetches label suggestions when typing promql" time="0.065">
-    </testcase>
-    <testcase classname="QueryEditor handles empty label suggestions gracefully" name="QueryEditor handles empty label suggestions gracefully" time="0.055">
-    </testcase>
-    <testcase classname="QueryEditor keeps step size when value is &gt;= min" name="QueryEditor keeps step size when value is &gt;= min" time="0.025">
-    </testcase>
-  </testsuite>
-  <testsuite name="DataSource" errors="0" failures="0" skipped="0" timestamp="2026-01-14T18:59:11" time="0.285" tests="17">
-    <testcase classname="DataSource constructs without crashing" name="DataSource constructs without crashing" time="0.001">
-    </testcase>
-    <testcase classname=" isExist returns value when function succeeds" name=" isExist returns value when function succeeds" time="0">
+    <testcase classname=" isExist returns value when function succeeds" name=" isExist returns value when function succeeds" time="0.001">
     </testcase>
     <testcase classname=" isExist returns false when function throws" name=" isExist returns false when function throws" time="0.001">
     </testcase>
-    <testcase classname=" serializeVariableValue returns string as-is" name=" serializeVariableValue returns string as-is" time="0">
+    <testcase classname=" serializeVariableValue returns string as-is" name=" serializeVariableValue returns string as-is" time="0.001">
     </testcase>
-    <testcase classname=" serializeVariableValue returns empty string for empty array" name=" serializeVariableValue returns empty string for empty array" time="0">
+    <testcase classname=" serializeVariableValue returns empty string for empty array" name=" serializeVariableValue returns empty string for empty array" time="0.002">
     </testcase>
-    <testcase classname=" serializeVariableValue joins array values with |" name=" serializeVariableValue joins array values with |" time="0">
+    <testcase classname=" serializeVariableValue joins array values with |" name=" serializeVariableValue joins array values with |" time="0.002">
     </testcase>
-    <testcase classname=" prometheusRegularEscape escapes backslashes and quotes" name=" prometheusRegularEscape escapes backslashes and quotes" time="0.001">
+    <testcase classname=" prometheusRegularEscape escapes backslashes and quotes" name=" prometheusRegularEscape escapes backslashes and quotes" time="0.002">
     </testcase>
-    <testcase classname=" prometheusRegularEscape returns non-string as-is" name=" prometheusRegularEscape returns non-string as-is" time="0">
+    <testcase classname=" prometheusRegularEscape returns non-string as-is" name=" prometheusRegularEscape returns non-string as-is" time="0.001">
     </testcase>
-    <testcase classname=" applyAdhocFilters applies label filters" name=" applyAdhocFilters applies label filters" time="0.003">
+    <testcase classname=" applyAdhocFilters applies label filters" name=" applyAdhocFilters applies label filters" time="0.008">
     </testcase>
-    <testcase classname=" applyAdhocFilters escapes regex operators" name=" applyAdhocFilters escapes regex operators" time="0">
+    <testcase classname=" applyAdhocFilters escapes regex operators" name=" applyAdhocFilters escapes regex operators" time="0.002">
     </testcase>
-    <testcase classname=" applyTemplateVariables replaces expressions safely" name=" applyTemplateVariables replaces expressions safely" time="0">
+    <testcase classname=" applyTemplateVariables replaces expressions safely" name=" applyTemplateVariables replaces expressions safely" time="0.003">
     </testcase>
-    <testcase classname=" getTagKeys returns metric keys" name=" getTagKeys returns metric keys" time="0.002">
+    <testcase classname=" getTagKeys returns metric keys" name=" getTagKeys returns metric keys" time="0.006">
     </testcase>
-    <testcase classname=" getTagKeys returns empty array if buffer is not string" name=" getTagKeys returns empty array if buffer is not string" time="0">
+    <testcase classname=" getTagKeys returns empty array if buffer is not string" name=" getTagKeys returns empty array if buffer is not string" time="0.002">
     </testcase>
-    <testcase classname=" getTagValues returns values for key" name=" getTagValues returns values for key" time="0.001">
+    <testcase classname=" getTagValues returns values for key" name=" getTagValues returns values for key" time="0.002">
     </testcase>
-    <testcase classname=" metricFindQuery returns formatted metric names" name=" metricFindQuery returns formatted metric names" time="0.001">
+    <testcase classname=" metricFindQuery returns formatted metric names" name=" metricFindQuery returns formatted metric names" time="0.003">
     </testcase>
-    <testcase classname=" fetchStaticLabels returns label list" name=" fetchStaticLabels returns label list" time="0.001">
+    <testcase classname=" fetchStaticLabels returns label list" name=" fetchStaticLabels returns label list" time="0.003">
     </testcase>
-    <testcase classname=" fetchStaticLabels returns empty array on error" name=" fetchStaticLabels returns empty array on error" time="0.001">
+    <testcase classname=" fetchStaticLabels returns empty array on error" name=" fetchStaticLabels returns empty array on error" time="0.002">
     </testcase>
   </testsuite>
-  <testsuite name="addLabelToSelector" errors="0" failures="0" skipped="0" timestamp="2026-01-14T18:59:11" time="0.263" tests="10">
-    <testcase classname="addLabelToSelector adds label to empty selector" name="addLabelToSelector adds label to empty selector" time="0.001">
+  <testsuite name="addLabelToSelector" errors="0" failures="0" skipped="0" timestamp="2026-02-12T18:39:18" time="66.339" tests="10">
+    <testcase classname="addLabelToSelector adds label to empty selector" name="addLabelToSelector adds label to empty selector" time="0.008">
     </testcase>
-    <testcase classname="addLabelToSelector adds label to existing selector" name="addLabelToSelector adds label to existing selector" time="0.001">
+    <testcase classname="addLabelToSelector adds label to existing selector" name="addLabelToSelector adds label to existing selector" time="0.002">
     </testcase>
     <testcase classname="addLabelToSelector uses provided operator" name="addLabelToSelector uses provided operator" time="0.001">
     </testcase>
     <testcase classname="addLabelToSelector does not duplicate identical labels" name="addLabelToSelector does not duplicate identical labels" time="0">
     </testcase>
-    <testcase classname="addLabelToQuery throws if label key is missing" name="addLabelToQuery throws if label key is missing" time="0.012">
+    <testcase classname="addLabelToQuery throws if label key is missing" name="addLabelToQuery throws if label key is missing" time="0.06">
     </testcase>
-    <testcase classname="addLabelToQuery adds selector to bare metric" name="addLabelToQuery adds selector to bare metric" time="0">
+    <testcase classname="addLabelToQuery adds selector to bare metric" name="addLabelToQuery adds selector to bare metric" time="0.003">
     </testcase>
     <testcase classname="addLabelToQuery adds label to existing selector" name="addLabelToQuery adds label to existing selector" time="0.001">
     </testcase>
-    <testcase classname="addLabelToQuery does not modify Grafana variables" name="addLabelToQuery does not modify Grafana variables" time="0">
+    <testcase classname="addLabelToQuery does not modify Grafana variables" name="addLabelToQuery does not modify Grafana variables" time="0.001">
     </testcase>
     <testcase classname="addLabelToQuery converts Infinity to +Inf" name="addLabelToQuery converts Infinity to +Inf" time="0.001">
     </testcase>
-    <testcase classname="addLabelToQuery adds label to multiple metrics" name="addLabelToQuery adds label to multiple metrics" time="0.001">
+    <testcase classname="addLabelToQuery adds label to multiple metrics" name="addLabelToQuery adds label to multiple metrics" time="0.002">
     </testcase>
   </testsuite>
-  <testsuite name="ConfigEditor" errors="0" failures="0" skipped="0" timestamp="2026-01-14T18:59:10" time="0.994" tests="10">
-    <testcase classname="ConfigEditor renders base fields" name="ConfigEditor renders base fields" time="0.065">
+  <testsuite name="ConfigEditor" errors="0" failures="0" skipped="0" timestamp="2026-02-12T18:39:09" time="167.852" tests="10">
+    <testcase classname="ConfigEditor renders base fields" name="ConfigEditor renders base fields" time="0.153">
     </testcase>
-    <testcase classname="ConfigEditor updates dbUser" name="ConfigEditor updates dbUser" time="0.034">
+    <testcase classname="ConfigEditor updates dbUser" name="ConfigEditor updates dbUser" time="0.03">
     </testcase>
-    <testcase classname="ConfigEditor updates password in secureJsonData" name="ConfigEditor updates password in secureJsonData" time="0.016">
+    <testcase classname="ConfigEditor updates password in secureJsonData" name="ConfigEditor updates password in secureJsonData" time="0.022">
     </testcase>
-    <testcase classname="ConfigEditor resets password and clears fields" name="ConfigEditor resets password and clears fields" time="0.024">
+    <testcase classname="ConfigEditor resets password and clears fields" name="ConfigEditor resets password and clears fields" time="0.047">
     </testcase>
-    <testcase classname="ConfigEditor renders BASIC auth fields" name="ConfigEditor renders BASIC auth fields" time="0.015">
+    <testcase classname="ConfigEditor renders BASIC auth fields" name="ConfigEditor renders BASIC auth fields" time="0.037">
     </testcase>
-    <testcase classname="ConfigEditor updates BASIC auth fields" name="ConfigEditor updates BASIC auth fields" time="0.019">
+    <testcase classname="ConfigEditor updates BASIC auth fields" name="ConfigEditor updates BASIC auth fields" time="0.024">
     </testcase>
-    <testcase classname="ConfigEditor updates deployment type" name="ConfigEditor updates deployment type" time="0.021">
+    <testcase classname="ConfigEditor updates deployment type" name="ConfigEditor updates deployment type" time="0.046">
     </testcase>
-    <testcase classname="ConfigEditor updates queryAuth when auth select changes" name="ConfigEditor updates queryAuth when auth select changes" time="0.016">
+    <testcase classname="ConfigEditor updates queryAuth when auth select changes" name="ConfigEditor updates queryAuth when auth select changes" time="0.023">
     </testcase>
-    <testcase classname="ConfigEditor updates deploymentType when deployment select changes" name="ConfigEditor updates deploymentType when deployment select changes" time="0.017">
+    <testcase classname="ConfigEditor updates deploymentType when deployment select changes" name="ConfigEditor updates deploymentType when deployment select changes" time="0.03">
     </testcase>
-    <testcase classname="ConfigEditor resets secure fields when password is reset" name="ConfigEditor resets secure fields when password is reset" time="0.086">
+    <testcase classname="ConfigEditor resets secure fields when password is reset" name="ConfigEditor resets secure fields when password is reset" time="0.163">
+    </testcase>
+  </testsuite>
+  <testsuite name="QueryEditor" errors="0" failures="0" skipped="0" timestamp="2026-02-12T18:39:18" time="165.728" tests="12">
+    <testcase classname="QueryEditor renders PROMQL editor by default" name="QueryEditor renders PROMQL editor by default" time="4.122">
+    </testcase>
+    <testcase classname="QueryEditor renders SQL editor when queryLang is sql" name="QueryEditor renders SQL editor when queryLang is sql" time="0.056">
+    </testcase>
+    <testcase classname="QueryEditor updates promql expression when typing" name="QueryEditor updates promql expression when typing" time="0.08">
+    </testcase>
+    <testcase classname="QueryEditor runs query when promql input loses focus" name="QueryEditor runs query when promql input loses focus" time="0.022">
+    </testcase>
+    <testcase classname="QueryEditor updates promql legend" name="QueryEditor updates promql legend" time="0.033">
+    </testcase>
+    <testcase classname="QueryEditor enforces minimum step size on blur (promql)" name="QueryEditor enforces minimum step size on blur (promql)" time="0.033">
+    </testcase>
+    <testcase classname="QueryEditor updates sql text when typing" name="QueryEditor updates sql text when typing" time="0.027">
+    </testcase>
+    <testcase classname="QueryEditor toggles Time Series Mode and runs query" name="QueryEditor toggles Time Series Mode and runs query" time="0.035">
+    </testcase>
+    <testcase classname="QueryEditor updates SQL prefetch count" name="QueryEditor updates SQL prefetch count" time="0.036">
+    </testcase>
+    <testcase classname="QueryEditor fetches label suggestions when typing promql" name="QueryEditor fetches label suggestions when typing promql" time="0.076">
+    </testcase>
+    <testcase classname="QueryEditor handles empty label suggestions gracefully" name="QueryEditor handles empty label suggestions gracefully" time="0.066">
+    </testcase>
+    <testcase classname="QueryEditor keeps step size when value is &gt;= min" name="QueryEditor keeps step size when value is &gt;= min" time="0.023">
+    </testcase>
+  </testsuite>
+  <testsuite name="VariableQueryEditor" errors="0" failures="0" skipped="0" timestamp="2026-02-12T18:40:15" time="110.294" tests="3">
+    <testcase classname="VariableQueryEditor renders query language selector and query input" name="VariableQueryEditor renders query language selector and query input" time="3.903">
+    </testcase>
+    <testcase classname="VariableQueryEditor updates query value when user types" name="VariableQueryEditor updates query value when user types" time="0.074">
+    </testcase>
+    <testcase classname="VariableQueryEditor calls onChange with updated query when input loses focus" name="VariableQueryEditor calls onChange with updated query when input loses focus" time="0.054">
     </testcase>
   </testsuite>
 </testsuites>

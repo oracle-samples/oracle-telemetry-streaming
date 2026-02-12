@@ -24,38 +24,26 @@
 //
 //-----------------------------------------------------------------------------
 
+import addLabelToQuery from './AddLabelToQuery';
 
-
-import addLabelToQuery from "./AddLabelToQuery";
-
-import { MetricFindValue, DataSourceInstanceSettings } from "@grafana/data";
+import { MetricFindValue, DataSourceInstanceSettings } from '@grafana/data';
 //For providing support of query variable we need to import MetricFindValue
 
-import {
-  DataSourceOptionsObj,
-  QueryObj,
-  VariableQueryObject,
-  InData,
-} from "./types";
+import { DataSourceOptionsObj, QueryObj, VariableQueryObject, InData } from './types';
 //For providing support of query variable we need to import VariableQueryObject
 
-import { getTemplateSrv, DataSourceWithBackend } from "@grafana/runtime";
+import { getTemplateSrv, DataSourceWithBackend } from '@grafana/runtime';
 //For providing support of custom variable we need to import getTemplateSrv
 
-export class DataSource extends DataSourceWithBackend<
-  QueryObj,
-  DataSourceOptionsObj
-> {
-  constructor(
-    instanceSettings: DataSourceInstanceSettings<DataSourceOptionsObj>
-  ) {
+export class DataSource extends DataSourceWithBackend<QueryObj, DataSourceOptionsObj> {
+  constructor(instanceSettings: DataSourceInstanceSettings<DataSourceOptionsObj>) {
     super(instanceSettings);
   }
 
   //get from time value from selected range
   getFromStr() {
     const templateSrv = getTemplateSrv();
-    const strret = templateSrv.replace("$__from", {}, (variables: any) => {
+    const strret = templateSrv.replace('$__from', {}, (variables: any) => {
       return variables;
     });
     return strret;
@@ -72,7 +60,7 @@ export class DataSource extends DataSourceWithBackend<
   //get to time value from selected range
   getToStr() {
     const templateSrv = getTemplateSrv();
-    const strret = templateSrv.replace("$__to", {}, (variables: any) => {
+    const strret = templateSrv.replace('$__to', {}, (variables: any) => {
       return variables;
     });
     return strret;
@@ -112,11 +100,11 @@ export class DataSource extends DataSourceWithBackend<
       const response = await this.query({
         targets: [
           {
-            refId: "fetchLabels",
-            rawQueryText: "",
-            expr: "",
-            exprProm: "",
-            exprSql: "",
+            refId: 'fetchLabels',
+            rawQueryText: '',
+            expr: '',
+            exprProm: '',
+            exprSql: '',
             timeFrom: fromms,
             timeTo: toms,
           },
@@ -129,7 +117,7 @@ export class DataSource extends DataSourceWithBackend<
       }
 
       const buffer = this.extractValue(response);
-      if (typeof buffer !== "string") {
+      if (typeof buffer !== 'string') {
         return [];
       }
 
@@ -142,7 +130,7 @@ export class DataSource extends DataSourceWithBackend<
       // Now map the array items.
       return arr_tags.map((name: string) => ({ name }));
     } catch (err) {
-      console.error("fetchStaticLabels failed:", err);
+      console.error('fetchStaticLabels failed:', err);
       return [];
     }
   }
@@ -158,36 +146,28 @@ export class DataSource extends DataSourceWithBackend<
     const adhocFilters = (getTemplateSrv() as any).getAdhocFilters(this.name);
 
     const applyTemplate = (value?: string) =>
-      value
-        ? templateSrv.replace(value, {}, (variables: any) =>
-            this.serializeVariableValue(variables)
-          )
-        : "";
+      value ? templateSrv.replace(value, {}, (variables: any) => this.serializeVariableValue(variables)) : '';
 
     const nextQuery: QueryObj = {
       ...query,
       expr: applyTemplate(query.expr),
-      exprSql: applyTemplate(
-        this.applyAdhocFilters(query.exprSql, adhocFilters)
-      ),
-      exprProm: applyTemplate(
-        this.applyAdhocFilters(query.exprProm, adhocFilters)
-      ),
+      exprSql: applyTemplate(this.applyAdhocFilters(query.exprSql, adhocFilters)),
+      exprProm: applyTemplate(this.applyAdhocFilters(query.exprProm, adhocFilters)),
     };
 
     return nextQuery;
   }
 
   private serializeVariableValue(variables: any): string {
-    if (typeof variables === "string") {
+    if (typeof variables === 'string') {
       return variables;
     }
 
     if (!Array.isArray(variables) || variables.length === 0) {
-      return "";
+      return '';
     }
 
-    return variables.join("|");
+    return variables.join('|');
   }
 
   async getTagKeys() {
@@ -196,11 +176,11 @@ export class DataSource extends DataSourceWithBackend<
     const response = await this.query({
       targets: [
         {
-          refId: "getKeysForAdHocFilter",
-          rawQueryText: "",
-          expr: "",
-          exprProm: "",
-          exprSql: "",
+          refId: 'getKeysForAdHocFilter',
+          rawQueryText: '',
+          expr: '',
+          exprProm: '',
+          exprSql: '',
           timeColumns: [],
         },
       ],
@@ -210,7 +190,7 @@ export class DataSource extends DataSourceWithBackend<
       throw new Error(response.error.message);
     }
     const buffer = this.extractValue(response);
-    if (typeof buffer !== "string") {
+    if (typeof buffer !== 'string') {
       return values;
     }
 
@@ -232,11 +212,11 @@ export class DataSource extends DataSourceWithBackend<
     const response = await this.query({
       targets: [
         {
-          refId: "getValueforKeyAdHocFilter",
+          refId: 'getValueforKeyAdHocFilter',
           rawQueryText: options.key,
-          expr: "",
-          exprSql: "",
-          exprProm: "",
+          expr: '',
+          exprSql: '',
+          exprProm: '',
           timeColumns: [],
         },
       ],
@@ -247,7 +227,7 @@ export class DataSource extends DataSourceWithBackend<
     }
 
     const buffer = this.extractValue(response);
-    if (typeof buffer !== "string") {
+    if (typeof buffer !== 'string') {
       return values;
     }
 
@@ -264,9 +244,7 @@ export class DataSource extends DataSourceWithBackend<
   }
 
   prometheusRegularEscape(value: any) {
-    return typeof value === "string"
-      ? value.replace(/\\/g, "\\\\").replace(/'/g, "\\\\'")
-      : value;
+    return typeof value === 'string' ? value.replace(/\\/g, '\\\\').replace(/'/g, "\\\\'") : value;
   }
 
   // this method fetches the tags corresponding to the promql query given for
@@ -278,11 +256,11 @@ export class DataSource extends DataSourceWithBackend<
     // changing millisecs epoch to secs epoch by dropping last 3 characters
     let fromstr = fromms.substring(0, fromms.length - 3);
     let tostr = toms.substring(0, toms.length - 3);
-    const query_with_time = query + "&start=" + fromstr + "&end=" + tostr;
+    const query_with_time = query + '&start=' + fromstr + '&end=' + tostr;
     const response = await this.query({
       targets: [
         {
-          refId: "metricFindQuery",
+          refId: 'metricFindQuery',
           rawQueryText: query_with_time,
           queryLang: queryLanguage,
           expr: query_with_time,
@@ -300,17 +278,14 @@ export class DataSource extends DataSourceWithBackend<
   //that is used for query variable support and then it does some manipulation
   //and makes array called values of type MetricFindValue which is
   //returned and rendered as options list in query variable in grafana.
-  async metricFindQuery(
-    query: VariableQueryObject,
-    options?: any
-  ): Promise<MetricFindValue[]> {
+  async metricFindQuery(query: VariableQueryObject, options?: any): Promise<MetricFindValue[]> {
     // Retrieve DataQueryResponse based on query.
     const response = await this.fetchMetricNames(query.query, query.queryLang);
     const values: MetricFindValue[] = [];
     //values.push({ text: 'up{instance="slc.us.oracle.com:9100",job="node"}' });
     //    var arr_tags = JSON.parse(response['data'][0].fields[0].values.buffer[0]).result_output.data;
     const buffer = this.extractValue(response);
-    if (typeof buffer !== "string") {
+    if (typeof buffer !== 'string') {
       return values;
     }
 
@@ -324,23 +299,20 @@ export class DataSource extends DataSourceWithBackend<
       const metric = item.__name__;
 
       const parts = Object.entries(item).map(([k, v]) => `${k}="${v}"`);
-      const joined = `{${parts.join(",")}}`;
+      const joined = `{${parts.join(',')}}`;
       values.push({ text: `${metric}${joined}` });
     }
     return values;
   }
 
-  private applyAdhocFilters(
-    expr: string | undefined,
-    filters: Array<{ key?: any; operator?: any; value?: any }>
-  ) {
+  private applyAdhocFilters(expr: string | undefined, filters: Array<{ key?: any; operator?: any; value?: any }>) {
     return filters.reduce((acc: string, filter) => {
       const { key, operator } = filter;
       let { value } = filter;
-      if (operator === "=~" || operator === "!~") {
+      if (operator === '=~' || operator === '!~') {
         value = this.prometheusRegularEscape(value);
       }
       return addLabelToQuery(acc, key, value, operator);
-    }, expr ?? "");
+    }, expr ?? '');
   }
 }

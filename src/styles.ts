@@ -24,9 +24,7 @@
 //
 //-----------------------------------------------------------------------------
 
-
-
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const Root = styled.div`
   position: relative;
@@ -57,7 +55,7 @@ export const AutoCompleteIcon = styled.span`
   height: 32px;
   width: 32px;
   transition: all 150ms linear;
-  transform: ${(props: any) => (props.isOpen ? "rotate(0.5turn)" : "none")};
+  transform: ${(props: any) => (props.isOpen ? 'rotate(0.5turn)' : 'none')};
   transform-origin: center;
   display: flex;
 
@@ -66,8 +64,8 @@ export const AutoCompleteIcon = styled.span`
   }
 
   ${ValueWrapper}:focus + & {
-    color: ${(props: any) => props.color || "0063cc"};
-    fill: ${(props: any) => props.fill || "0063cc"};
+    color: ${(props: any) => props.color || '0063cc'};
+    fill: ${(props: any) => props.fill || '0063cc'};
   }
 `;
 
@@ -114,8 +112,8 @@ export const Input = styled(ValueWrapper)`
     outline: none;
 
     + ${AutoCompleteIcon} {
-      color: ${(props: any) => props.color || "0063cc"};
-      fill: ${(props: any) => props.fill || "0063cc"};
+      color: ${(props: any) => props.color || '0063cc'};
+      fill: ${(props: any) => props.fill || '0063cc'};
     }
   }
 `;

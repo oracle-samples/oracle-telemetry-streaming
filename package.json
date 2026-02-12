@@ -28,7 +28,7 @@
     "rxjs": "7.3.0"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=14 <17"
   },
   "dependencies": {
     "@types/react": "^17.0.20",
