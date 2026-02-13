@@ -6,7 +6,7 @@ This plugin allows users to connect Grafana to Oracle telemetry and streaming in
 
 ---
 
-# Overview
+## Overview
 
 This repository contains a Grafana backend data source plugin composed of:
 
@@ -17,11 +17,11 @@ The plugin enables secure data retrieval and visualization of Oracle telemetry a
 
 ---
 
-# Installation
+## Installation
 
-## System Requirements
+### System Requirements
 
-### Frontend Requirements
+#### Frontend Requirements
 
 - Node.js **16.x** (required) (suggested v16.20.2)
 - Yarn **1.x** (suggested 1.22.11)
@@ -42,7 +42,7 @@ node --version
 yarn --version
 ```
 
-### Backend Requirements
+#### Backend Requirements
 
 - Go 1.24.0
 - Go modules enabled
@@ -53,16 +53,16 @@ Verify:
 go version
 ```
 
-## Cloning the Repository
+### Cloning the Repository
 
 ```bash
 git clone <repository-url>
 cd <repository-folder>
 ```
 
-# Build Instructions
+## Build Instructions
 
-## Frontend Build
+### Frontend Build
 
 Install Dependencies
 
@@ -97,17 +97,17 @@ yarn build
 This generates optimized frontend assets inside the `dist/` directory.
 
 
-## Backend Build
+### Backend Build
 
 The backend component is implemented in Go using the Grafana Plugin SDK.
 
-### Install Dependencies
+#### Install Dependencies
 
 ```bash
 go mod tidy
 ```
 
-### Build Backend Binary
+#### Build Backend Binary
 
 ```bash
 go build -o dist/gpx_oracle-telemetry_linux_amd64 ./pkg
@@ -118,7 +118,7 @@ This generates the backend plugin binary inside the `dist/` directory.
 
 ---
 
-# Running the Plugin in Grafana
+## Running the Plugin in Grafana
 1. Download a stable version of Grafana (recommended: version 8 through 12) from:
    https://grafana.com/grafana/download
 2. Extract Grafana to a directory (e.g., `<GRAFANA_HOME>`).
@@ -146,7 +146,7 @@ This generates the backend plugin binary inside the `dist/` directory.
 
 ---
 
-# Project Structure
+## Project Structure
 
 ```
 .
@@ -171,7 +171,7 @@ This generates the backend plugin binary inside the `dist/` directory.
 
 ---
 
-# Documentation
+## Documentation
 
 Grafana Backend Plugin Documentation:
 
@@ -181,7 +181,7 @@ Grafana Backend Plugin Documentation:
 
 ---
 
-# Contributing
+## Contributing
 
 Contributions are welcome.
 
@@ -228,13 +228,13 @@ This project welcomes contributions from the community. Before submitting a pull
 
 ---
 
-# Security
+## Security
 
 If you discover a security vulnerability, please follow the responsible disclosure process described in our [security guide](./SECURITY.md).
 
 ---
 
-# License
+## License
 
 Copyright (c) 2026 Oracle and/or its affiliates.
 
