@@ -23,9 +23,10 @@ The plugin enables secure data retrieval and visualization of Oracle telemetry a
 
 ### Frontend Requirements
 
-- Node.js **16.x** (required)
-- Yarn **1.x**
-- npm 8.x (bundled with Node 16)
+- Node.js **16.x** (required) (suggested v16.20.2)
+- Yarn **1.x** (suggested 1.22.11)
+- npm 8.x (bundled with Node 16) (suggested 8.19.4)
+These are fully compatible with @grafana/toolkit v8.5.27 and webpack 4.41.5
 
 Recommended setup using nvm:
 
@@ -43,7 +44,7 @@ yarn --version
 
 ### Backend Requirements
 
-- Go **1.20 or later**
+- Go 1.24.0
 - Go modules enabled
 
 Verify:
@@ -223,13 +224,13 @@ Please ensure:
 - No unintended files (e.g., `node_modules/`, `dist/`) are committed
    
 
-This project welcomes contributions from the community. Before submitting a pull request, please review our contribution guide. (./CONTRIBUTING.md)
+This project welcomes contributions from the community. Before submitting a pull request, please review our [contribution guide](./CONTRIBUTING.md)
 
 ---
 
 # Security
 
-If you discover a security vulnerability, please follow the responsible disclosure process described in our security guide. (./SECURITY.md)`.
+If you discover a security vulnerability, please follow the responsible disclosure process described in our [security guide](./SECURITY.md)`.
 
 ---
 
