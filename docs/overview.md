@@ -76,6 +76,49 @@ The Oracle Database is the **policy enforcement point**.
 
 All database access is performed exclusively by the backend Go plugin running inside Grafana.
 
+## Oracle Client Runtime Dependency
+
+The backend plugin requires the **Oracle Instant Client** to be installed on the same host as the Grafana server.
+
+The plugin uses the `godror` Oracle database driver, which depends on ODPI-C and dynamically loads the Oracle Call Interface (OCI) shared libraries at runtime. The plugin itself does not implement the Oracle database wire protocol. All authentication, encryption, and network communication with the database are performed by the Oracle client libraries.
+
+### Connection Path
+
+    Browser (Grafana UI)
+            ↓
+    Grafana Backend Plugin (Go)
+            ↓
+    godror driver
+            ↓
+    ODPI-C
+            ↓
+    Oracle Instant Client (OCI libraries)
+            ↓
+    Oracle Net (TLS / Wallet)
+            ↓
+    Oracle Database
+
+### Configuration Dependency
+
+Database connectivity and security behavior depend on the Oracle client configuration present on the host system, including:
+
+- TNS_ADMIN wallet configuration
+- sqlnet.ora
+- tnsnames.ora
+- Autonomous Database wallet files
+
+The plugin does not read or interpret these files directly; they are handled entirely by the Oracle client libraries.
+
+### Trust Boundary Implications
+
+Because the plugin dynamically loads native Oracle client libraries:
+
+- The host operating system environment becomes part of the trusted computing base
+- Network encryption and certificate validation are enforced by the Oracle client stack
+- The effective security posture depends on the installed Oracle Instant Client version
+- Patching and updating the Oracle client libraries is the responsibility of the system administrator
+
+Misconfiguration of the local Oracle client may affect transport security independently of the plugin.
 ---
 
 # 3. Datasource Configuration Screenshots
