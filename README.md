@@ -91,28 +91,59 @@ Verify:
 ```bash
 echo $LD_LIBRARY_PATH
 ```
-
 #### Oracle Network Configuration
 
-Depending on the Oracle environment being used, additional Oracle client configuration may be required.
+Additional Oracle client configuration may be required depending on the Oracle environment.
 
-Supported Oracle network configuration may include:
+For wallet-based connections, such as Oracle Autonomous Database or TCPS-enabled databases, extract the complete wallet archive into a directory and set `TNS_ADMIN` to that directory.
 
-- `TNS_ADMIN`
-- `tnsnames.ora`
-- `sqlnet.ora`
-- Oracle wallet files
+The extracted wallet directory should contain files such as:
+
+* `tnsnames.ora`
+* `sqlnet.ora`
+* Oracle wallet files
 
 Example:
 
 ```bash
-export TNS_ADMIN=/path/to/network/admin
+export TNS_ADMIN=/path/to/extracted/wallet
 ```
 
-This is commonly required when connecting to:
-- Oracle Autonomous Database
-- TCPS-enabled databases
-- Wallet-authenticated environments
+After extracting the wallet, open the `sqlnet.ora` file in the same directory.
+
+By default, it may contain a wallet location similar to:
+
+```text
+WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY="?/network/admin")))
+```
+
+Update the `DIRECTORY` value so that it points to the directory where the wallet was extracted. This should normally be the same directory assigned to `TNS_ADMIN`.
+
+Example:
+
+```text
+WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY="/path/to/extracted/wallet")))
+SSL_SERVER_DN_MATCH=yes
+```
+
+For example:
+
+```bash
+export TNS_ADMIN=/scratch/user/project/tklocal/wallet93
+```
+
+The corresponding `sqlnet.ora` entry should be:
+
+```text
+WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY="/scratch/user/project/tklocal/wallet93")))
+SSL_SERVER_DN_MATCH=yes
+```
+
+Ensure that:
+
+1. The entire wallet archive is extracted into the directory.
+2. `TNS_ADMIN` points to the extracted wallet directory.
+3. The `WALLET_LOCATION` value in `sqlnet.ora` points to the same directory.
 
 ### Cloning the Repository
 
@@ -193,10 +224,14 @@ tar -zxf grafana-enterprise-8.5.13.linux-amd64.tar.gz
 
 2. Extract Grafana to a directory (e.g., `<GRAFANA_HOME>`).
 
-3. Copy the plugin folder into:
+3. Copy the whole oracle-telemetry-streaming-main directory, including all files and subdirectories inside it, into Grafana’s data/plugins directory.
+
+Do not copy only the contents of the plugin folder.
+
+The resulting directory structure should be:
 
    ```
-   <GRAFANA_HOME>/data/plugins/
+   <GRAFANA_HOME>/data/plugins/oracle-telemetry-streaming-main/
    ```
 
 Example:
@@ -206,6 +241,11 @@ mkdir -p <GRAFANA_HOME>/data/plugins/
 
 cp -r oracle-telemetry-streaming-main \
   <GRAFANA_HOME>/data/plugins/
+```
+After copying, verify that the plugin directory exists:
+
+```bash
+ls "$GRAFANA_HOME/data/plugins/oracle-telemetry-streaming-main"
 ```
 
 4. Enable unsigned plugins in:
