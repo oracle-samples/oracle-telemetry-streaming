@@ -3,6 +3,7 @@ module github.com/grafana/grafana-starter-datasource-backend
 go 1.24.0
 
 require (
+	github.com/DATA-DOG/go-sqlmock v1.5.2
 	github.com/godror/godror v0.44.2
 	github.com/grafana/grafana-plugin-sdk-go v0.102.0
 )
@@ -43,6 +44,6 @@ require (
 	golang.org/x/text v0.32.0 // indirect
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
 	google.golang.org/genproto v0.0.0-20200911024640-645f7a48b24f // indirect
-	google.golang.org/grpc v1.77.0 // indirect
+	google.golang.org/grpc v1.79.3 // indirect
 	google.golang.org/protobuf v1.36.10 // indirect
 )
