@@ -46,7 +46,7 @@
   "dependencies": {
     "@types/react": "^17.0.20",
     "list-react-files": "^0.2.0",
-    "lodash": "^4.17.21",
+    "lodash": "^4.18.1",
     "monaco-editor": "^0.21.2",
     "react": "17",
     "react-dom": "17",
